@@ -1,0 +1,252 @@
+{
+  "tech": {
+    "en": {
+      "keywords": [
+        "Python",
+        "JavaScript",
+        "API",
+        "cloud",
+        "AWS",
+        "Azure",
+        "scalability",
+        "CI/CD",
+        "microservices",
+        "Docker",
+        "Kubernetes",
+        "optimization",
+        "latency",
+        "machine learning",
+        "AI",
+        "backend",
+        "frontend",
+        "full-stack",
+        "SQL",
+        "NoSQL"
+      ],
+      "action_verbs": [
+        "engineered",
+        "architected",
+        "optimized",
+        "scaled",
+        "automated",
+        "deployed",
+        "developed",
+        "led",
+        "spearheaded"
+      ]
+    },
+    "es": {
+      "keywords": [
+        "Python",
+        "JavaScript",
+        "API",
+        "nube",
+        "AWS",
+        "Azure",
+        "escalabilidad",
+        "CI/CD",
+        "microservicios",
+        "Docker",
+        "Kubernetes",
+        "optimización",
+        "latencia",
+        "aprendizaje automático",
+        "IA",
+        "backend",
+        "frontend",
+        "full-stack",
+        "SQL",
+        "NoSQL"
+      ],
+      "action_verbs": [
+        "diseñó",
+        "optimizó",
+        "automatizó",
+        "implementó",
+        "desarrolló",
+        "lideró",
+        "escaló",
+        "desplegó",
+        "arquitectó"
+      ]
+    }
+  },
+  "finance": {
+    "en": {
+      "keywords": [
+        "ROI",
+        "risk modeling",
+        "financial analysis",
+        "forecasting",
+        "P&L",
+        "compliance",
+        "audit",
+        "investment",
+        "valuation",
+        "M&A",
+        "Excel",
+        "Tableau",
+        "Power BI"
+      ],
+      "action_verbs": [
+        "managed",
+        "analyzed",
+        "reduced costs",
+        "increased revenue",
+        "forecasted",
+        "optimized portfolio",
+        "led audit"
+      ]
+    },
+    "es": {
+      "keywords": [
+        "ROI",
+        "modelado de riesgo",
+        "análisis financiero",
+        "pronóstico",
+        "P&L",
+        "cumplimiento",
+        "auditoría",
+        "inversión",
+        "valoración",
+        "fusiones y adquisiciones",
+        "Excel",
+        "Tableau",
+        "Power BI"
+      ],
+      "action_verbs": [
+        "gestionó",
+        "analizó",
+        "redujo costos",
+        "incrementó ingresos",
+        "pronosticó",
+        "optimizó cartera",
+        "lideró auditoría"
+      ]
+    }
+  },
+  "healthcare": {
+    "en": {
+      "keywords": [
+        "patient care",
+        "clinical trials",
+        "EMR",
+        "HIPAA",
+        "diagnosis",
+        "treatment plans",
+        "nursing",
+        "pharmacy",
+        "public health"
+      ],
+      "action_verbs": [
+        "improved",
+        "coordinated",
+        "implemented protocols",
+        "led clinical team",
+        "enhanced patient outcomes"
+      ]
+    },
+    "es": {
+      "keywords": [
+        "atención al paciente",
+        "ensayos clínicos",
+        "historia clínica",
+        "HIPAA",
+        "diagnóstico",
+        "planes de tratamiento",
+        "enfermería",
+        "farmacia",
+        "salud pública"
+      ],
+      "action_verbs": [
+        "mejoró",
+        "coordinó",
+        "implementó protocolos",
+        "lideró equipo clínico",
+        "mejoró resultados del paciente"
+      ]
+    }
+  },
+  "hr": {
+    "en": {
+      "keywords": [
+        "recruitment",
+        "onboarding",
+        "performance management",
+        "HRIS",
+        "employee engagement",
+        "talent acquisition",
+        "compensation",
+        "benefits"
+      ],
+      "action_verbs": [
+        "spearheaded hiring",
+        "improved retention",
+        "designed onboarding",
+        "managed HR systems"
+      ]
+    },
+    "es": {
+      "keywords": [
+        "reclutamiento",
+        "incorporación",
+        "gestión del desempeño",
+        "HRIS",
+        "compromiso",
+        "adquisición de talento",
+        "compensación",
+        "beneficios"
+      ],
+      "action_verbs": [
+        "lideró contratación",
+        "mejoró retención",
+        "diseñó incorporación",
+        "gestionó sistemas HR"
+      ]
+    }
+  },
+  "engineering": {
+    "en": {
+      "keywords": [
+        "CAD",
+        "mechanical design",
+        "thermal analysis",
+        "prototyping",
+        "manufacturing",
+        "Six Sigma",
+        "project management",
+        "AutoCAD",
+        "SolidWorks"
+      ],
+      "action_verbs": [
+        "designed",
+        "engineered",
+        "tested",
+        "validated",
+        "optimized",
+        "led cross-functional team"
+      ]
+    },
+    "es": {
+      "keywords": [
+        "CAD",
+        "diseño mecánico",
+        "análisis térmico",
+        "prototipado",
+        "manufactura",
+        "Six Sigma",
+        "gestión de proyectos",
+        "AutoCAD",
+        "SolidWorks"
+      ],
+      "action_verbs": [
+        "diseñó",
+        "ingenierizó",
+        "probó",
+        "validó",
+        "optimizó",
+        "lideró equipo multifuncional"
+      ]
+    }
+  }
+}
