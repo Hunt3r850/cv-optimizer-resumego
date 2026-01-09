@@ -103,6 +103,10 @@ streamlit run app.py
 | `Dockerfile` | Instrucciones para construir la imagen Docker de la aplicación. |
 | `docker-compose.yml` | Configuración para ejecutar la aplicación junto con el servicio de Ollama. |
 
+## 📜 Historial de Cambios
+
+Para ver el detalle de todas las actualizaciones y mejoras, consulta el archivo [CHANGELOG.md](CHANGELOG.md).
+
 ## 📝 Licencia
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
