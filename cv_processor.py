@@ -142,21 +142,54 @@ def process_experience(experience_lines, industry: str, lang: str):
 def generate_html_cv(name, experience, education, skills, lang="en"):
     template_html = """
     <!DOCTYPE html>
-    <html>
-    <head><meta charset="UTF-8"><title>{{name}} - CV</title>
-    <style>body{font-family:Arial,sans-serif;line-height:1.5}h2{border-bottom:1px solid #ccc;padding-bottom:3px}ul{margin-top:5px}</style>
+    <html lang="{{ lang }}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ name }} - CV</title>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+            h1 { font-size: 24pt; margin-bottom: 5px; color: #000; text-align: center; text-transform: uppercase; }
+            h2 { font-size: 14pt; text-transform: uppercase; border-bottom: 2px solid #333; margin-top: 25px; margin-bottom: 10px; color: #000; }
+            h3 { font-size: 12pt; margin-top: 15px; margin-bottom: 5px; }
+            .job-header { display: flex; justify-content: space-between; font-weight: bold; }
+            .job-details { font-style: italic; margin-bottom: 8px; }
+            ul { margin-top: 5px; padding-left: 20px; }
+            li { margin-bottom: 5px; }
+        </style>
     </head>
     <body>
-      <h1>{{name}}</h1>
-      <h2>{{ "Experiencia Profesional" if lang == "es" else "Professional Experience" }}</h2>
-      {% for job in experience %}
-        <h3>{{ job.title }} — {{ job.company }} ({{ job.dates }})</h3>
-        <ul>{% for b in job.bullets %}<li>{{ b }}</li>{% endfor %}</ul>
-      {% endfor %}
-      <h2>{{ "Educación" if lang == "es" else "Education" }}</h2>
-      <p>{{ education }}</p>
-      <h2>{{ "Habilidades" if lang == "es" else "Skills" }}</h2>
-      <p>{{ skills }}</p>
+        <header>
+            <h1>{{ name }}</h1>
+        </header>
+
+        <section>
+            <h2>{{ "Experiencia Profesional" if lang == "es" else "Professional Experience" }}</h2>
+            {% for job in experience %}
+            <div class="experience-item">
+                <div class="job-header">
+                    <span>{{ job.title }}</span>
+                    <span>{{ job.dates }}</span>
+                </div>
+                <div class="job-details">{{ job.company }}</div>
+                <ul>
+                    {% for b in job.bullets %}
+                    <li>{{ b }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </section>
+
+        <section>
+            <h2>{{ "Educación" if lang == "es" else "Education" }}</h2>
+            <p>{{ education }}</p>
+        </section>
+
+        <section>
+            <h2>{{ "Habilidades" if lang == "es" else "Skills" }}</h2>
+            <p>{{ skills }}</p>
+        </section>
     </body>
     </html>
     """

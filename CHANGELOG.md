@@ -2,9 +2,10 @@
 
 Todas las actualizaciones notables de este proyecto se detallan a continuación.
 
-## [1.1.0] - 2026-01-09
+## [1.2.0] - 2026-01-09
 
 ### ✨ Mejoras y Nuevas Funcionalidades
+- **Nueva Plantilla ATS-Friendly:** Se ha integrado una estructura HTML optimizada para sistemas de seguimiento de candidatos, mejorando la jerarquía semántica y la legibilidad por máquinas.
 - **Soporte de Ejecución Nativa:** Se ha adaptado el proyecto para funcionar localmente sin necesidad de Docker, facilitando el desarrollo y las pruebas rápidas.
 - **Detección Dinámica de Ollama:** El procesador ahora detecta automáticamente si Ollama se ejecuta en `localhost` o dentro de una red Docker.
 - **Script de Configuración Automática (`setup.sh`):** Nuevo script que automatiza la creación del entorno virtual, instalación de dependencias y descarga de modelos de spaCy y Ollama.
