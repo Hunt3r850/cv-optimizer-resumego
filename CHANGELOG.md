@@ -2,6 +2,13 @@
 
 Todas las actualizaciones notables de este proyecto se detallan a continuación.
 
+## [1.3.0] - 2026-01-09
+
+### ✨ Mejoras y Nuevas Funcionalidades
+- **Parsing Estructurado Completo:** Nueva lógica de extracción que captura información de contacto, resumen profesional y certificaciones.
+- **Plantilla Profesional Premium:** Rediseño total del HTML con una estética moderna y profesional, manteniendo la compatibilidad 100% con ATS.
+- **Mejora en la Interfaz:** Interfaz de Streamlit actualizada para mostrar una vista previa más amplia y detalles de la industria.
+
 ## [1.2.0] - 2026-01-09
 
 ### ✨ Mejoras y Nuevas Funcionalidades
