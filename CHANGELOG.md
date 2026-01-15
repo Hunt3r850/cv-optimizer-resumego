@@ -2,6 +2,14 @@
 
 Todas las actualizaciones notables de este proyecto se detallan a continuación.
 
+## [1.4.0] - 2026-01-09
+
+### ✨ Mejoras y Nuevas Funcionalidades
+- **Soporte Multilingüe Completo:** Ahora puedes optimizar CVs en **Español, Inglés, Alemán e Italiano**.
+- **Selector de Idioma:** Nueva interfaz que permite elegir el idioma de salida y la industria.
+- **Modelos NLP Específicos:** Integración de modelos de spaCy para cada idioma, mejorando drásticamente la precisión de la extracción.
+- **Prompts Adaptativos:** Llama 3 ahora recibe instrucciones en el idioma nativo del CV para una optimización más natural.
+
 ## [1.3.0] - 2026-01-09
 
 ### ✨ Mejoras y Nuevas Funcionalidades

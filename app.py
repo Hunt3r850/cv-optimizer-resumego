@@ -11,16 +11,37 @@ import pdfplumber
 from io import BytesIO
 
 INDUSTRIES = ["tech", "finance", "healthcare", "hr", "engineering"]
+LANGUAGES = {
+    "es": "Español 🇪🇸",
+    "en": "English 🇺🇸",
+    "de": "Deutsch 🇩🇪",
+    "it": "Italiano 🇮🇹"
+}
 
-st.set_page_config(page_title="Optimizador de CV - ATS Master", layout="wide")
+st.set_page_config(page_title="Optimizador de CV Multilingüe - ATS Master", layout="wide")
 
-st.title("✨ Optimizador de CV (ATS Master)")
+st.title("🌍 Optimizador de CV Multilingüe (ATS Master)")
 st.markdown("""
-Esta herramienta utiliza **Llama 3** y **NLP avanzado** para transformar tu CV en una versión optimizada para sistemas ATS.
-- **Estructura Semántica:** Genera HTML que los reclutadores y algoritmos adoran.
-- **Mejora de Contenido:** Reescribe tus logros para que sean más impactantes.
-- **Detección Automática:** Identifica tu industria y habilidades clave.
+Optimiza tu CV para sistemas ATS en múltiples idiomas utilizando **Llama 3** y **NLP avanzado**.
+- **Multilingüe:** Soporte completo para Español, Inglés, Alemán e Italiano.
+- **Estructura Semántica:** Genera HTML optimizado para reclutadores y algoritmos.
+- **Mejora de Contenido:** Reescribe tus logros con verbos de acción potentes en el idioma elegido.
 """)
+
+# Sidebar para configuración
+with st.sidebar:
+    st.header("⚙️ Configuración")
+    selected_lang = st.selectbox(
+        "Selecciona el idioma del CV:",
+        options=list(LANGUAGES.keys()),
+        format_func=lambda x: LANGUAGES[x],
+        index=0
+    )
+    
+    selected_industry = st.selectbox(
+        "Selecciona tu industria (o deja que el sistema la detecte):",
+        options=["Auto-detectar"] + [i.capitalize() for i in INDUSTRIES]
+    )
 
 uploaded_file = st.file_uploader("📂 Sube tu CV en PDF", type=["pdf"])
 cv_text = ""
@@ -36,12 +57,16 @@ if st.button("🚀 Optimizar y Generar CV ATS"):
     if not cv_text.strip():
         st.error("Por favor, ingresa texto o sube un PDF.")
     else:
-        with st.spinner("Analizando y optimizando con Llama 3..."):
+        with st.spinner(f"Analizando y optimizando en {LANGUAGES[selected_lang]} con Llama 3..."):
             try:
                 # 1. Análisis básico
-                lang = detect_language(cv_text)
-                auto_industry = detect_industry(cv_text, lang)
-                industry = auto_industry if auto_industry in INDUSTRIES else "tech"
+                lang = selected_lang
+                
+                if selected_industry == "Auto-detectar":
+                    auto_industry = detect_industry(cv_text, lang)
+                    industry = auto_industry if auto_industry in INDUSTRIES else "tech"
+                else:
+                    industry = selected_industry.lower()
                 
                 # 2. Parsing de secciones
                 sections = parse_cv_text(cv_text, lang)
@@ -52,15 +77,14 @@ if st.button("🚀 Optimizar y Generar CV ATS"):
                 
                 summary = " ".join(sections.get("summary", []))
                 if not summary and sections.get("contact"):
-                    # A veces el resumen se queda en la sección de contacto si no hay encabezado
+                    # Fallback para resumen si no hay encabezado claro
                     summary = " ".join(sections.get("contact", [])[4:8])
                 
                 experience = process_experience(sections.get("experience", []), industry, lang)
                 education = " ".join(sections.get("education", ["No especificado"]))
                 certifications = sections.get("certifications", [])
                 
-                all_text_for_skills = cv_text
-                skills = extract_skills(all_text_for_skills, industry, lang)
+                skills = extract_skills(cv_text, industry, lang)
                 
                 # 4. Preparar datos para la plantilla
                 cv_data = {
@@ -77,19 +101,23 @@ if st.button("🚀 Optimizar y Generar CV ATS"):
                 # 5. Generar HTML
                 html_cv = generate_html_cv(cv_data)
                 
-                st.success("✅ CV optimizado con éxito")
+                st.success(f"✅ CV optimizado con éxito en {LANGUAGES[lang]}")
                 
-                col1, col2 = st.columns([1, 1])
+                col1, col2 = st.columns([1, 2])
                 
                 with col1:
-                    st.info(f"**Idioma:** {'Español' if lang == 'es' else 'English'}")
-                    st.info(f"**Industria detectada:** {industry.upper()}")
+                    st.info(f"**Idioma:** {LANGUAGES[lang]}")
+                    st.info(f"**Industria:** {industry.upper()}")
                     st.download_button(
-                        label="📥 Descargar CV ATS (HTML)",
+                        label=f"📥 Descargar CV {lang.upper()} (HTML)",
                         data=html_cv,
-                        file_name="cv_optimizado_ats.html",
+                        file_name=f"cv_optimizado_{lang}.html",
                         mime="text/html"
                     )
+                    
+                    with st.expander("Ver detalles técnicos"):
+                        st.write(f"Secciones detectadas: {list(sections.keys())}")
+                        st.write(f"Habilidades extraídas: {len(skills)}")
                 
                 with col2:
                     st.markdown("### Vista Previa")

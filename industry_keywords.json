@@ -1,252 +1,92 @@
 {
   "tech": {
     "en": {
-      "keywords": [
-        "Python",
-        "JavaScript",
-        "API",
-        "cloud",
-        "AWS",
-        "Azure",
-        "scalability",
-        "CI/CD",
-        "microservices",
-        "Docker",
-        "Kubernetes",
-        "optimization",
-        "latency",
-        "machine learning",
-        "AI",
-        "backend",
-        "frontend",
-        "full-stack",
-        "SQL",
-        "NoSQL"
-      ],
-      "action_verbs": [
-        "engineered",
-        "architected",
-        "optimized",
-        "scaled",
-        "automated",
-        "deployed",
-        "developed",
-        "led",
-        "spearheaded"
-      ]
+      "keywords": ["Python", "JavaScript", "API", "cloud", "AWS", "Azure", "scalability", "CI/CD", "microservices", "Docker", "Kubernetes", "optimization", "latency", "machine learning", "AI", "backend", "frontend", "full-stack", "SQL", "NoSQL"],
+      "action_verbs": ["engineered", "architected", "optimized", "scaled", "automated", "deployed", "developed", "led", "spearheaded"]
     },
     "es": {
-      "keywords": [
-        "Python",
-        "JavaScript",
-        "API",
-        "nube",
-        "AWS",
-        "Azure",
-        "escalabilidad",
-        "CI/CD",
-        "microservicios",
-        "Docker",
-        "Kubernetes",
-        "optimización",
-        "latencia",
-        "aprendizaje automático",
-        "IA",
-        "backend",
-        "frontend",
-        "full-stack",
-        "SQL",
-        "NoSQL"
-      ],
-      "action_verbs": [
-        "diseñó",
-        "optimizó",
-        "automatizó",
-        "implementó",
-        "desarrolló",
-        "lideró",
-        "escaló",
-        "desplegó",
-        "arquitectó"
-      ]
+      "keywords": ["Python", "JavaScript", "API", "nube", "AWS", "Azure", "escalabilidad", "CI/CD", "microservicios", "Docker", "Kubernetes", "optimización", "latencia", "aprendizaje automático", "IA", "backend", "frontend", "full-stack", "SQL", "NoSQL"],
+      "action_verbs": ["diseñó", "optimizó", "automatizó", "implementó", "desarrolló", "lideró", "escaló", "desplegó", "arquitectó"]
+    },
+    "de": {
+      "keywords": ["Python", "JavaScript", "API", "Cloud", "AWS", "Azure", "Skalierbarkeit", "CI/CD", "Mikroservices", "Docker", "Kubernetes", "Optimierung", "Latenz", "Maschinelles Lernen", "KI", "Backend", "Frontend", "Full-Stack", "SQL", "NoSQL"],
+      "action_verbs": ["entwickelt", "architektiert", "optimiert", "skaliert", "automatisiert", "bereitgestellt", "geleitet", "implementiert"]
+    },
+    "it": {
+      "keywords": ["Python", "JavaScript", "API", "cloud", "AWS", "Azure", "scalabilità", "CI/CD", "microservizi", "Docker", "Kubernetes", "ottimizzazione", "latenza", "apprendimento automatico", "IA", "backend", "frontend", "full-stack", "SQL", "NoSQL"],
+      "action_verbs": ["progettato", "architettato", "ottimizzato", "scalato", "automatizzato", "distribuito", "sviluppato", "guidato", "implementato"]
     }
   },
   "finance": {
     "en": {
-      "keywords": [
-        "ROI",
-        "risk modeling",
-        "financial analysis",
-        "forecasting",
-        "P&L",
-        "compliance",
-        "audit",
-        "investment",
-        "valuation",
-        "M&A",
-        "Excel",
-        "Tableau",
-        "Power BI"
-      ],
-      "action_verbs": [
-        "managed",
-        "analyzed",
-        "reduced costs",
-        "increased revenue",
-        "forecasted",
-        "optimized portfolio",
-        "led audit"
-      ]
+      "keywords": ["ROI", "risk modeling", "financial analysis", "forecasting", "P&L", "compliance", "audit", "investment", "valuation", "M&A", "Excel", "Tableau", "Power BI"],
+      "action_verbs": ["managed", "analyzed", "reduced costs", "increased revenue", "forecasted", "optimized portfolio", "led audit"]
     },
     "es": {
-      "keywords": [
-        "ROI",
-        "modelado de riesgo",
-        "análisis financiero",
-        "pronóstico",
-        "P&L",
-        "cumplimiento",
-        "auditoría",
-        "inversión",
-        "valoración",
-        "fusiones y adquisiciones",
-        "Excel",
-        "Tableau",
-        "Power BI"
-      ],
-      "action_verbs": [
-        "gestionó",
-        "analizó",
-        "redujo costos",
-        "incrementó ingresos",
-        "pronosticó",
-        "optimizó cartera",
-        "lideró auditoría"
-      ]
+      "keywords": ["ROI", "modelado de riesgo", "análisis financiero", "pronóstico", "P&L", "cumplimiento", "auditoría", "inversión", "valoración", "fusiones y adquisiciones", "Excel", "Tableau", "Power BI"],
+      "action_verbs": ["gestionó", "analizó", "redujo costos", "incrementó ingresos", "pronosticó", "optimizó cartera", "lideró auditoría"]
+    },
+    "de": {
+      "keywords": ["ROI", "Risikomodellierung", "Finanzanalyse", "Prognose", "GuV", "Compliance", "Audit", "Investition", "Bewertung", "M&A", "Excel", "Tableau", "Power BI"],
+      "action_verbs": ["verwaltet", "analysiert", "Kosten gesenkt", "Umsatz gesteigert", "prognostiziert", "Portfolio optimiert", "Audit geleitet"]
+    },
+    "it": {
+      "keywords": ["ROI", "modellazione del rischio", "analisi finanziaria", "previsione", "P&L", "conformità", "audit", "investimento", "valutazione", "M&A", "Excel", "Tableau", "Power BI"],
+      "action_verbs": ["gestito", "analizzato", "ridotto i costi", "aumentato i ricavi", "previsto", "ottimizzato il portafoglio", "guidato l'audit"]
     }
   },
   "healthcare": {
     "en": {
-      "keywords": [
-        "patient care",
-        "clinical trials",
-        "EMR",
-        "HIPAA",
-        "diagnosis",
-        "treatment plans",
-        "nursing",
-        "pharmacy",
-        "public health"
-      ],
-      "action_verbs": [
-        "improved",
-        "coordinated",
-        "implemented protocols",
-        "led clinical team",
-        "enhanced patient outcomes"
-      ]
+      "keywords": ["patient care", "clinical trials", "EMR", "HIPAA", "diagnosis", "treatment plans", "nursing", "pharmacy", "public health"],
+      "action_verbs": ["improved", "coordinated", "implemented protocols", "led clinical team", "enhanced patient outcomes"]
     },
     "es": {
-      "keywords": [
-        "atención al paciente",
-        "ensayos clínicos",
-        "historia clínica",
-        "HIPAA",
-        "diagnóstico",
-        "planes de tratamiento",
-        "enfermería",
-        "farmacia",
-        "salud pública"
-      ],
-      "action_verbs": [
-        "mejoró",
-        "coordinó",
-        "implementó protocolos",
-        "lideró equipo clínico",
-        "mejoró resultados del paciente"
-      ]
+      "keywords": ["atención al paciente", "ensayos clínicos", "historia clínica", "HIPAA", "diagnóstico", "planes de tratamiento", "enfermería", "farmacia", "salud pública"],
+      "action_verbs": ["mejoró", "coordinó", "implementó protocolos", "lideró equipo clínico", "mejoró resultados del paciente"]
+    },
+    "de": {
+      "keywords": ["Patientenversorgung", "klinische Studien", "EMR", "HIPAA", "Diagnose", "Behandlungspläne", "Pflege", "Pharmazie", "öffentliche Gesundheit"],
+      "action_verbs": ["verbessert", "koordiniert", "Protokolle implementiert", "klinisches Team geleitet", "Patientenergebnisse verbessert"]
+    },
+    "it": {
+      "keywords": ["cura del paziente", "sperimentazioni cliniche", "EMR", "HIPAA", "diagnosi", "piani di trattamento", "infermieristica", "farmacia", "salute pubblica"],
+      "action_verbs": ["migliorato", "coordinato", "implementato protocolli", "guidato team clinico", "migliorato esiti dei pazienti"]
     }
   },
   "hr": {
     "en": {
-      "keywords": [
-        "recruitment",
-        "onboarding",
-        "performance management",
-        "HRIS",
-        "employee engagement",
-        "talent acquisition",
-        "compensation",
-        "benefits"
-      ],
-      "action_verbs": [
-        "spearheaded hiring",
-        "improved retention",
-        "designed onboarding",
-        "managed HR systems"
-      ]
+      "keywords": ["recruitment", "onboarding", "performance management", "HRIS", "employee engagement", "talent acquisition", "compensation", "benefits"],
+      "action_verbs": ["spearheaded hiring", "improved retention", "designed onboarding", "managed HR systems"]
     },
     "es": {
-      "keywords": [
-        "reclutamiento",
-        "incorporación",
-        "gestión del desempeño",
-        "HRIS",
-        "compromiso",
-        "adquisición de talento",
-        "compensación",
-        "beneficios"
-      ],
-      "action_verbs": [
-        "lideró contratación",
-        "mejoró retención",
-        "diseñó incorporación",
-        "gestionó sistemas HR"
-      ]
+      "keywords": ["reclutamiento", "incorporación", "gestión del desempeño", "HRIS", "compromiso", "adquisición de talento", "compensación", "beneficios"],
+      "action_verbs": ["lideró contratación", "mejoró retención", "diseñó incorporación", "gestionó sistemas HR"]
+    },
+    "de": {
+      "keywords": ["Personalbeschaffung", "Onboarding", "Leistungsmanagement", "HRIS", "Mitarbeiterengagement", "Talentakquise", "Vergütung", "Benefits"],
+      "action_verbs": ["Einstellung geleitet", "Fluktuation gesenkt", "Onboarding entworfen", "HR-Systeme verwaltet"]
+    },
+    "it": {
+      "keywords": ["reclutamento", "onboarding", "gestione delle prestazioni", "HRIS", "coinvolgimento dei dipendenti", "acquisizione di talenti", "compensazione", "benefit"],
+      "action_verbs": ["guidato le assunzioni", "migliorato la fidelizzazione", "progettato l'onboarding", "gestito sistemi HR"]
     }
   },
   "engineering": {
     "en": {
-      "keywords": [
-        "CAD",
-        "mechanical design",
-        "thermal analysis",
-        "prototyping",
-        "manufacturing",
-        "Six Sigma",
-        "project management",
-        "AutoCAD",
-        "SolidWorks"
-      ],
-      "action_verbs": [
-        "designed",
-        "engineered",
-        "tested",
-        "validated",
-        "optimized",
-        "led cross-functional team"
-      ]
+      "keywords": ["CAD", "mechanical design", "thermal analysis", "prototyping", "manufacturing", "Six Sigma", "project management", "AutoCAD", "SolidWorks"],
+      "action_verbs": ["designed", "engineered", "tested", "validated", "optimized", "led cross-functional team"]
     },
     "es": {
-      "keywords": [
-        "CAD",
-        "diseño mecánico",
-        "análisis térmico",
-        "prototipado",
-        "manufactura",
-        "Six Sigma",
-        "gestión de proyectos",
-        "AutoCAD",
-        "SolidWorks"
-      ],
-      "action_verbs": [
-        "diseñó",
-        "ingenierizó",
-        "probó",
-        "validó",
-        "optimizó",
-        "lideró equipo multifuncional"
-      ]
+      "keywords": ["CAD", "diseño mecánico", "análisis térmico", "prototipado", "manufactura", "Six Sigma", "gestión de proyectos", "AutoCAD", "SolidWorks"],
+      "action_verbs": ["diseñó", "ingenierizó", "probó", "validó", "optimizó", "lideró equipo multifuncional"]
+    },
+    "de": {
+      "keywords": ["CAD", "mechanisches Design", "thermische Analyse", "Prototyping", "Fertigung", "Six Sigma", "Projektmanagement", "AutoCAD", "SolidWorks"],
+      "action_verbs": ["entworfen", "konstruiert", "getestet", "validiert", "optimiert", "multifunktionales Team geleitet"]
+    },
+    "it": {
+      "keywords": ["CAD", "progettazione meccanica", "analisi termica", "prototipazione", "produzione", "Six Sigma", "gestione del progetto", "AutoCAD", "SolidWorks"],
+      "action_verbs": ["progettato", "ingegnerizzato", "testato", "validato", "ottimizzato", "guidato team interfunzionale"]
     }
   }
 }

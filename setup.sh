@@ -29,6 +29,8 @@ pip install -r requirements.txt
 echo -e "${BLUE}🧠 Descargando modelos de procesamiento de lenguaje (spaCy)...${NC}"
 python3 -m spacy download es_core_news_sm
 python3 -m spacy download en_core_web_sm
+python3 -m spacy download de_core_news_sm
+python3 -m spacy download it_core_news_sm
 
 # 5. Verificar Ollama
 echo -e "${BLUE}🦙 Verificando Ollama...${NC}"
