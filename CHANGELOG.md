@@ -2,6 +2,13 @@
 
 Todas las actualizaciones notables de este proyecto se detallan a continuación.
 
+## [1.5.1] - 2026-01-09
+
+### 🐛 Correcciones y Robustez
+- **Parsing JSON Ultra-Robusto:** Se ha implementado un sistema de limpieza y validación de JSON para evitar errores cuando la IA incluye texto extra o comentarios.
+- **Prompt Estricto:** Refinamiento de las instrucciones a Llama 3 para forzar una salida de datos pura y estructurada.
+- **Sistema de Auto-Reparación:** Si el primer intento de parsing falla, el sistema intenta reparar el objeto JSON automáticamente.
+
 ## [1.5.0] - 2026-01-09
 
 ### ✨ Mejoras y Nuevas Funcionalidades

@@ -67,7 +67,7 @@ def detect_industry(cv_text: str, lang: str) -> str:
                 scores[industry] += 1
     return max(scores, key=scores.get) if any(v > 0 for v in scores.values()) else "tech"
 
-def call_llama(prompt: str, temperature=0.5):
+def call_llama(prompt: str, temperature=0.1):
     try:
         ollama_url = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate")
         response = requests.post(
@@ -78,7 +78,7 @@ def call_llama(prompt: str, temperature=0.5):
                 "stream": False,
                 "options": {"temperature": temperature}
             },
-            timeout=60
+            timeout=90
         )
         if response.ok:
             return response.json().get("response", "").strip()
@@ -86,53 +86,67 @@ def call_llama(prompt: str, temperature=0.5):
         pass
     return ""
 
-def ai_parse_cv(cv_text: str, lang: str):
+def clean_json_response(response: str):
     """
-    Usa Llama 3 para estructurar el CV en un formato JSON limpio.
+    Limpia la respuesta de la IA para extraer un objeto JSON válido.
     """
-    prompt = f"""
-    Analyze the following CV text and extract the information into a structured JSON format.
-    The output MUST be ONLY the JSON object, nothing else.
-    Language of the CV: {lang}
-
-    JSON Structure:
-    {{
-        "name": "Full Name",
-        "contact_info": "Email, Phone, Location, LinkedIn",
-        "summary": "Professional summary or profile",
-        "experience": [
-            {{
-                "title": "Job Title",
-                "company": "Company Name",
-                "dates": "Start - End Date",
-                "bullets": ["Improved achievement 1", "Improved achievement 2"]
-            }}
-        ],
-        "education": "Degree, University, Year",
-        "certifications": ["Cert 1", "Cert 2"],
-        "skills": ["Skill 1", "Skill 2"]
-    }}
-
-    IMPORTANT: For the 'bullets' in experience, rewrite them to be more impactful using strong action verbs in {lang}.
-    
-    CV TEXT:
-    {cv_text}
-    """
-    
-    response = call_llama(prompt, temperature=0.2)
-    
-    # Intentar extraer JSON de la respuesta
     try:
         # Buscar el primer '{' y el último '}'
         start = response.find('{')
         end = response.rfind('}') + 1
         if start != -1 and end != 0:
             json_str = response[start:end]
+            # Eliminar posibles comentarios o texto extra dentro del bloque
             return json.loads(json_str)
-    except:
-        pass
-    
+    except Exception as e:
+        print(f"Error limpiando JSON: {e}")
     return None
+
+def ai_parse_cv(cv_text: str, lang: str):
+    """
+    Usa Llama 3 para estructurar el CV en un formato JSON limpio con un prompt ultra-estricto.
+    """
+    prompt = f"""
+    TASK: Convert the following CV text into a valid JSON object.
+    LANGUAGE: {lang}
+    RULES:
+    1. Output ONLY the JSON object. No preamble, no explanation.
+    2. Use the exact keys provided below.
+    3. Rewrite experience bullets to be impactful in {lang} using strong action verbs.
+    4. If a field is missing, use an empty string or empty list.
+
+    JSON STRUCTURE:
+    {{
+        "name": "Full Name",
+        "contact_info": "Email | Phone | Location | LinkedIn",
+        "summary": "Professional summary",
+        "experience": [
+            {{
+                "title": "Job Title",
+                "company": "Company Name",
+                "dates": "Dates",
+                "bullets": ["Achievement 1", "Achievement 2"]
+            }}
+        ],
+        "education": "Degree and University",
+        "certifications": ["Cert 1", "Cert 2"],
+        "skills": ["Skill 1", "Skill 2"]
+    }}
+
+    CV TEXT TO PROCESS:
+    {cv_text}
+    """
+    
+    response = call_llama(prompt, temperature=0.1)
+    data = clean_json_response(response)
+    
+    # Si falla el primer intento, probar con un prompt de reparación
+    if not data:
+        repair_prompt = f"Fix this broken JSON and return ONLY the valid JSON object:\n{response}"
+        response = call_llama(repair_prompt, temperature=0.0)
+        data = clean_json_response(response)
+        
+    return data
 
 def generate_html_cv(data):
     lang = data.get("lang", "en")
@@ -142,7 +156,7 @@ def generate_html_cv(data):
         "es": {"exp": "Experiencia Profesional", "edu": "Educación", "cert": "Certificaciones", "skills": "Habilidades Técnicas", "sum": "Resumen Profesional", "no_exp": "No se detectó experiencia detallada."},
         "en": {"exp": "Professional Experience", "edu": "Education", "cert": "Certifications", "skills": "Technical Skills", "sum": "Professional Summary", "no_exp": "No detailed experience detected."},
         "de": {"exp": "Berufserfahrung", "edu": "Ausbildung", "cert": "Zertifizierungen", "skills": "Technische Fähigkeiten", "sum": "Zusammenfassung", "no_exp": "Keine detaillierte Erfahrung gefunden."},
-        "it": {"exp": "Esperienza Professionale", "edu": "Istruzione", "cert": "Certificazioni", "skills": "Competenze Tecniche", "sum": "Profilo Professionale", "no_exp": "Nessuna esperienza dettagliata rilevata."}
+        "it": {"exp": "Esperienza Professionale", "edu": "Istruzione", "cert": "Certificazioni", "skills": "Competenze Tecniche", "sum": "Profilo Professionale", "no_exp": "Nessuna experiencia dettagliata rilevata."}
     }
     
     t = headers.get(lang, headers["en"])
