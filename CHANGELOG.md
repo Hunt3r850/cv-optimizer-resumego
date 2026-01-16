@@ -2,6 +2,13 @@
 
 Todas las actualizaciones notables de este proyecto se detallan a continuación.
 
+## [1.5.0] - 2026-01-09
+
+### ✨ Mejoras y Nuevas Funcionalidades
+- **AI-Powered Parsing (Llama 3):** Se ha sustituido el parsing basado en reglas por una extracción contextual inteligente. Llama 3 ahora identifica secciones, cargos y logros de forma dinámica.
+- **Estructuración JSON:** Los datos se procesan ahora en formato JSON estructurado, garantizando que ninguna sección (como contacto o certificaciones) se pierda.
+- **Optimización Multilingüe Superior:** La IA ahora reescribe los logros directamente en el idioma objetivo, manteniendo la coherencia gramatical y profesional en EN, ES, DE e IT.
+
 ## [1.4.0] - 2026-01-09
 
 ### ✨ Mejoras y Nuevas Funcionalidades

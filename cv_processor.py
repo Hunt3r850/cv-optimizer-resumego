@@ -67,31 +67,7 @@ def detect_industry(cv_text: str, lang: str) -> str:
                 scores[industry] += 1
     return max(scores, key=scores.get) if any(v > 0 for v in scores.values()) else "tech"
 
-def improve_bullet_with_llama(bullet: str, industry: str, lang: str):
-    keywords, verbs = get_keywords_and_verbs(industry, lang)
-    verbs_str = ", ".join(verbs)
-    
-    prompts = {
-        "es": (f"Reescribe este punto de CV para que sea más impactante, usando verbos de acción fuertes "
-               f"y sugiriendo un espacio para una métrica si falta. Usa tono profesional. "
-               f"Solo devuelve la oración mejorada.\n\nIndustria: {industry}\n"
-               f"Verbos recomendados: {verbs_str}\n\nOriginal: \"{bullet}\"\nMejorado:"),
-        "en": (f"Rewrite this CV bullet point to be more impactful, using strong action verbs "
-               f"and adding a placeholder for a metric if missing. Use professional tone. "
-               f"Only return the improved sentence.\n\nIndustry: {industry}\n"
-               f"Preferred verbs: {verbs_str}\n\nOriginal: \"{bullet}\"\nImproved:"),
-        "de": (f"Schreiben Sie diesen CV-Aufzählungspunkt um, um ihn wirkungsvoller zu gestalten, "
-               f"verwenden Sie starke Aktionsverben und fügen Sie einen Platzhalter für eine Metrik hinzu, falls diese fehlt. "
-               f"Verwenden Sie einen professionellen Ton. Geben Sie nur den verbesserten Satz zurück.\n\n"
-               f"Branche: {industry}\nEmpfohlene Verben: {verbs_str}\n\nOriginal: \"{bullet}\"\nVerbessert:"),
-        "it": (f"Riscrivi questo punto del CV per renderlo più incisivo, usando verbi d'azione forti "
-               f"e aggiungendo un segnaposto per una metrica se mancante. Usa un tono professionale. "
-               f"Restituisci solo la frase migliorata.\n\nSettore: {industry}\n"
-               f"Verbi consigliati: {verbs_str}\n\nOriginale: \"{bullet}\"\nMigliorato:")
-    }
-    
-    prompt = prompts.get(lang, prompts["en"])
-
+def call_llama(prompt: str, temperature=0.5):
     try:
         ollama_url = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate")
         response = requests.post(
@@ -100,121 +76,63 @@ def improve_bullet_with_llama(bullet: str, industry: str, lang: str):
                 "model": "llama3",
                 "prompt": prompt,
                 "stream": False,
-                "options": {"temperature": 0.5, "num_predict": 100}
+                "options": {"temperature": temperature}
             },
-            timeout=30
+            timeout=60
         )
         if response.ok:
-            return response.json().get("response", bullet).strip()
-        else:
-            return bullet
+            return response.json().get("response", "").strip()
     except:
-        return bullet
+        pass
+    return ""
 
-def parse_cv_text(cv_text: str, lang: str):
-    sections = {
-        "contact": [],
-        "summary": [],
-        "experience": [],
-        "education": [],
-        "certifications": [],
-        "skills": []
-    }
-    
-    current = "contact"
-    lines = cv_text.splitlines()
-    
-    # Términos de búsqueda para secciones en múltiples idiomas
-    terms_map = {
-        "experience": {
-            "en": ["experience", "work history", "professional experience", "employment"],
-            "es": ["experiencia", "historial laboral", "experiencia profesional"],
-            "de": ["berufserfahrung", "werdegang", "arbeitserfahrung"],
-            "it": ["esperienza", "esperienze professionali", "storia lavorativa"]
-        },
-        "education": {
-            "en": ["education", "academic", "studies"],
-            "es": ["educación", "formación", "estudios", "academia"],
-            "de": ["ausbildung", "studium", "bildung"],
-            "it": ["istruzione", "formazione", "studi"]
-        },
-        "certifications": {
-            "en": ["certifications", "courses", "awards"],
-            "es": ["certificaciones", "cursos", "premios", "diplomas"],
-            "de": ["zertifizierungen", "kurse", "auszeichnungen"],
-            "it": ["certificazioni", "corsi", "premi"]
-        },
-        "skills": {
-            "en": ["skills", "competencies", "expertise", "technologies"],
-            "es": ["habilidades", "competencias", "conocimientos", "tecnologías"],
-            "de": ["kenntnisse", "fertigkeiten", "kompetenzen", "it-kenntnisse"],
-            "it": ["competenze", "abilità", "conoscenze", "tecnologie"]
-        },
-        "summary": {
-            "en": ["summary", "profile", "about me", "objective"],
-            "es": ["resumen", "perfil", "sobre mí", "objetivo"],
-            "de": ["zusammenfassung", "profil", "über mich"],
-            "it": ["riepilogo", "profilo", "su di me", "obiettivo"]
-        }
-    }
-    
-    # Obtener términos para el idioma actual o inglés por defecto
-    current_terms = {sec: langs.get(lang, langs["en"]) for sec, langs in terms_map.items()}
-    
-    for line in lines:
-        line_strip = line.strip()
-        if not line_strip: continue
-        
-        line_lower = line_strip.lower().rstrip(":")
-        
-        found_section = False
-        for sec, keywords in current_terms.items():
-            if any(kw == line_lower or line_lower.startswith(kw + " ") for kw in keywords):
-                current = sec
-                found_section = True
-                break
-        
-        if not found_section:
-            sections[current].append(line_strip)
-            
-    return sections
+def ai_parse_cv(cv_text: str, lang: str):
+    """
+    Usa Llama 3 para estructurar el CV en un formato JSON limpio.
+    """
+    prompt = f"""
+    Analyze the following CV text and extract the information into a structured JSON format.
+    The output MUST be ONLY the JSON object, nothing else.
+    Language of the CV: {lang}
 
-def process_experience(experience_lines, industry: str, lang: str):
-    jobs = []
-    current_job = None
+    JSON Structure:
+    {{
+        "name": "Full Name",
+        "contact_info": "Email, Phone, Location, LinkedIn",
+        "summary": "Professional summary or profile",
+        "experience": [
+            {{
+                "title": "Job Title",
+                "company": "Company Name",
+                "dates": "Start - End Date",
+                "bullets": ["Improved achievement 1", "Improved achievement 2"]
+            }}
+        ],
+        "education": "Degree, University, Year",
+        "certifications": ["Cert 1", "Cert 2"],
+        "skills": ["Skill 1", "Skill 2"]
+    }}
+
+    IMPORTANT: For the 'bullets' in experience, rewrite them to be more impactful using strong action verbs in {lang}.
     
-    # Conectores de lugar en varios idiomas
-    connectors = {
-        "en": ["at", "in", "|"],
-        "es": ["en", "en", "|"],
-        "de": ["bei", "in", "|"],
-        "it": ["presso", "a", "|"]
-    }
-    conn_list = connectors.get(lang, connectors["en"])
-    conn_regex = "|".join([re.escape(c) for c in conn_list])
+    CV TEXT:
+    {cv_text}
+    """
     
-    for line in experience_lines:
-        # Intentar detectar una nueva posición: Cargo [conector] Empresa (Fecha)
-        match = re.search(rf"(.+?)(?:\s+(?:{conn_regex})\s+)(.+?)(?:\s+[\(\[|]\s*(.+?)\s*[\)\]|]|$)", line, re.IGNORECASE)
-        
-        if match:
-            title, company, dates = match.groups()
-            current_job = {
-                "title": title.strip(),
-                "company": company.strip(),
-                "dates": dates.strip() if dates else "Present",
-                "bullets": []
-            }
-            jobs.append(current_job)
-        elif line.startswith(("-", "•", "*")) and current_job is not None:
-            clean_bullet = re.sub(r"^[-•*]\s*", "", line).strip()
-            improved = improve_bullet_with_llama(clean_bullet, industry, lang)
-            current_job["bullets"].append(improved)
-        elif current_job is not None and len(line) > 10:
-            improved = improve_bullet_with_llama(line, industry, lang)
-            current_job["bullets"].append(improved)
-            
-    return jobs
+    response = call_llama(prompt, temperature=0.2)
+    
+    # Intentar extraer JSON de la respuesta
+    try:
+        # Buscar el primer '{' y el último '}'
+        start = response.find('{')
+        end = response.rfind('}') + 1
+        if start != -1 and end != 0:
+            json_str = response[start:end]
+            return json.loads(json_str)
+    except:
+        pass
+    
+    return None
 
 def generate_html_cv(data):
     lang = data.get("lang", "en")
